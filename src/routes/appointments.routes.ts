@@ -6,16 +6,15 @@ import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import CreateAppointmentService from '../services/CreateAppointmentService';
 
 const appointmentsRouter = Router();
-const appointmentsRepository = new AppointmentsRepository();
 
-appointmentsRouter.get('/', (req, res) => {
+appointmentsRouter.get('/appointments', (req, res) => {
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
   const appointment = appointmentsRepository.find();
 
   return res.status(200).json(appointment);
 })
 
-appointmentsRouter.post('/', async (req, res) => {
+appointmentsRouter.post('/appointments', async (req, res) => {
   try {
     const { provider, date } = req.body;
 
