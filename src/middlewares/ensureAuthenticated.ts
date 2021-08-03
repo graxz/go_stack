@@ -3,8 +3,14 @@ import { verify } from "jsonwebtoken";
 
 import authConfig from '../config/auth';
 
-export default function ensureAuthenticated(req: Request, res: Response, next: NextFunction): void {
-  const authHeader = req.headers.authorization;
+interface TokenPayload {
+  sub: string;
+  iat: number;
+  exp: number;
+}
+
+export default function ensureAuthenticated(request: Request, response: Response, next: NextFunction): void {
+  const authHeader = request.headers.authorization;
 
   if (!authHeader) {
     throw new Error("Unauthorization");
@@ -14,6 +20,12 @@ export default function ensureAuthenticated(req: Request, res: Response, next: N
 
   try {
     const decode = verify(token, authConfig.jwt.secret);
+
+    const { sub } = decode as TokenPayload;
+
+    request.user = {
+      id: sub,
+    }
 
     return next();
   } catch {
