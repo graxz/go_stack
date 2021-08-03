@@ -2,12 +2,12 @@
   "name": "gostack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "dev:server": "ts-node-dev --ignore-watch node_modules src/server.ts",
-    "start": "ts-node src/index.ts",
+    "start": "ts-node src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "author": "",

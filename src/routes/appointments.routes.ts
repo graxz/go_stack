@@ -7,14 +7,14 @@ import CreateAppointmentService from '../services/CreateAppointmentService';
 
 const appointmentsRouter = Router();
 
-appointmentsRouter.get('/appointments', (req, res) => {
+appointmentsRouter.get('/', async (req, res) => {
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
-  const appointment = appointmentsRepository.find();
-
-  return res.status(200).json(appointment);
+  const appointment = await appointmentsRepository.find();
+  
+  return res.json(appointment);
 })
 
-appointmentsRouter.post('/appointments', async (req, res) => {
+appointmentsRouter.post('/', async (req, res) => {
   try {
     const { provider, date } = req.body;
 
@@ -27,8 +27,10 @@ appointmentsRouter.post('/appointments', async (req, res) => {
       date: parsedDate
     })
     
-    return res.status(200).json(appointment);
+    return res.json(appointment);
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    return res.json({ error: err.message });
   }
 })
+
+export default appointmentsRouter;
