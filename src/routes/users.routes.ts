@@ -14,9 +14,9 @@ userRouter.post('/', async (req, res) => {
       name, password, email
     });
 
-    return res.send(user);
+    return res.status(201).json({ message: 'User created successfully' });
   } catch (err) {
-    return res.json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 })
 
