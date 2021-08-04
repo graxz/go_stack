@@ -26,19 +26,14 @@ userRouter.post('/', async (req, res) => {
 })
 
 userRouter.patch('/upload', ensureAuthenticated, upload.single('avatar'), async (req, res) => {
-  try {
-    const updateUserAvatar = new UpdateUserAvatarService();
+  const updateUserAvatar = new UpdateUserAvatarService();
 
-    const user = await updateUserAvatar.execute({
-      user_id: req.user.id,
-      avatar: req.file.filename
-    });
+  const user = await updateUserAvatar.execute({
+    user_id: req.user.id,
+    avatar: req.file.filename
+  });
 
-    return res.json({ message: 'Avatar updated successfully', avatar: user.avatar });
-  } catch (err) {
-    return res.status(err.status_code).json({ error: err.message });
-  }
-
+  return res.json({ message: 'Avatar updated successfully', avatar: user.avatar });
 })
 
 export default userRouter;
