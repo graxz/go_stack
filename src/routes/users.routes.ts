@@ -34,7 +34,7 @@ userRouter.patch('/upload', ensureAuthenticated, upload.single('avatar'), async 
       avatar: req.file.filename
     });
 
-    return res.status(200).json({ message: 'Avatar updated successfully', user_id: user.id });
+    return res.status(200).json({ message: 'Avatar updated successfully', avatar: user.avatar });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
