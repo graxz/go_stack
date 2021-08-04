@@ -12,9 +12,9 @@ sessionsRouter.post('/', async (req, res) => {
 
     const { user, token } = await authenticateUser.execute({ email, password });
 
-    return res.status(200).json({ message: 'Login successful', token });
+    return res.json({ message: 'Login successful', token });
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    return res.status(err.status_code).json({ error: err.message });
   }
 })
 

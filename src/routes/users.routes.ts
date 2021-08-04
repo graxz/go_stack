@@ -19,9 +19,9 @@ userRouter.post('/', async (req, res) => {
       name, password, email
     });
 
-    return res.status(201).json({ message: 'User created successfully', id: user.id });
+    return res.json({ message: 'User created successfully', id: user.id });
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    return res.status(err.status_code).json({ error: err.message });
   }
 })
 
@@ -34,9 +34,9 @@ userRouter.patch('/upload', ensureAuthenticated, upload.single('avatar'), async 
       avatar: req.file.filename
     });
 
-    return res.status(200).json({ message: 'Avatar updated successfully', avatar: user.avatar });
+    return res.json({ message: 'Avatar updated successfully', avatar: user.avatar });
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    return res.status(err.status_code).json({ error: err.message });
   }
 
 })

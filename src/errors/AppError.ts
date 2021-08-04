@@ -5,7 +5,5 @@ export default class AppError {
   constructor(message: string, status_code = 400) {
     this.message = message;
     this.status_code = status_code;
-
-    
   }
 }

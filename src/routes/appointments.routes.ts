@@ -28,9 +28,9 @@ appointmentsRouter.post('/', ensureAuthenticated, async (req, res) => {
       provider_id
     })
     
-    return res.status(201).json(appointment);
+    return res.json(appointment);
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    return res.status(err.status_code).json({ error: err.message });
   }
 })
 
